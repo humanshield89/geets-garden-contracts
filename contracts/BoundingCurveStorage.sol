@@ -2,14 +2,12 @@
 pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "./APEERC20Template.sol";
+import "./GEETSGardenToken.sol";
 import "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol";
 import "hardhat/console.sol";
-// Uncomment this line to use console.log
-// import "hardhat/console.sol";
 
 uint256 constant INITIAL_SUPPLY = 1_000_000_000 ether;
 uint256 constant AUTO_LAUNCH_MC = 69_000;
@@ -156,7 +154,7 @@ contract BoundingCurveStorage is OwnableUpgradeable {
         string memory symbol_,
         uint256 maxWallet_
     ) public payable {
-        APEERC20Template newToken = new APEERC20Template(
+        GEETSGardenToken newToken = new GEETSGardenToken(
             address(uniFactory),
             WETH,
             name_,
@@ -329,9 +327,9 @@ contract BoundingCurveStorage is OwnableUpgradeable {
 
         if (
             marketCap >= DISABLE_MAXWALLET_MC * 10 ** oracleDecimals &&
-            APEERC20Template(token_).maxWallet() > 0
+            GEETSGardenToken(token_).maxWallet() > 0
         ) {
-            APEERC20Template(token_).setmaxWallet(0);
+            GEETSGardenToken(token_).setmaxWallet(0);
         }
 
         if (marketCap >= AUTO_LAUNCH_MC * 10 ** oracleDecimals) {
@@ -359,7 +357,7 @@ contract BoundingCurveStorage is OwnableUpgradeable {
         virtualLiquidity[token_].launched = true;
 
         // disable max wallet after launch
-        APEERC20Template(token_).renounceOwnership();
+        GEETSGardenToken(token_).renounceOwnership();
 
         uint256 reserves0 = virtualLiquidity[token_].reserve0;
         uint256 reserves1 = virtualLiquidity[token_].reserve1;

@@ -2,14 +2,10 @@
 pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-// ownable
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
 
-// Uncomment this line to use console.log
-// import "hardhat/console.sol";
-
-contract APEERC20Template is ERC20, Ownable {
+contract GEETSGardenToken is ERC20, Ownable {
     uint256 public maxWallet;
     address public immutable pairAddress;
 
@@ -52,14 +48,14 @@ contract APEERC20Template is ERC20, Ownable {
             // can't sen tokens to pair before launch
             require(
                 to != pairAddress || from == owner(),
-                "APEERC20Template: Can't send tokens to pair before launch"
+                "GEETSGardenToken: Can't send tokens to pair before launch"
             );
 
             // max wallet
             if (maxWallet > 0 && to != owner()) {
                 require(
                     balanceOf(to) <= maxWallet,
-                    "APEERC20Template: Max wallet limit exceeded"
+                    "GEETSGardenToken: Max wallet limit exceeded"
                 );
             }
         }

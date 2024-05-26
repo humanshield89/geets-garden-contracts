@@ -6,8 +6,8 @@ import { anyValue } from "@nomicfoundation/hardhat-chai-matchers/withArgs";
 import { expect } from "chai";
 import hre from "hardhat";
 import {
-  APEERC20Template__factory,
-  APEERC20Template,
+  GEETSGardenToken__factory,
+  GEETSGardenToken,
   FakeOracleAggregator__factory,
   FakeOracleAggregator,
   BoundingCurveUpgradable__factory,
@@ -291,7 +291,7 @@ describe("Bounding Curve", function () {
 
   const TOKEN1_NAME = "TOKEN1";
   const TOKEN1_SYMBOL = "SYMBOL";
-  let token1: APEERC20Template;
+  let token1: GEETSGardenToken;
 
   it("should deploy a new ERC22", async () => {
     const [owner, feeCollector, deployer1] = await ethers.getSigners();
@@ -339,7 +339,7 @@ describe("Bounding Curve", function () {
       throw new Error("Token address not found");
     }
 
-    token1 = APEERC20Template__factory.connect(tokenAddress, owner);
+    token1 = GEETSGardenToken__factory.connect(tokenAddress, owner);
 
     const name = await token1.name();
     expect(name).to.equal(TOKEN1_NAME);
@@ -367,7 +367,7 @@ describe("Bounding Curve", function () {
   const TOKEN2_NAME = "TOKEN2";
   const TOKEN2_SYMBOL = "SYMBOL2";
   const TOKEN2_MAX_WALLET = (INITIAL_SUPPLY * 51n) / 100n;
-  let token2: APEERC20Template;
+  let token2: GEETSGardenToken;
 
   it("should deploy second token with owner appeing", async () => {
     const [owner, feeCollector, deployer1, deployer2] =
@@ -411,7 +411,7 @@ describe("Bounding Curve", function () {
       throw new Error("Token address not found");
     }
 
-    token2 = APEERC20Template__factory.connect(tokenAddress, owner);
+    token2 = GEETSGardenToken__factory.connect(tokenAddress, owner);
 
     const name = await token2.name();
     expect(name).to.equal(TOKEN2_NAME);
@@ -907,11 +907,11 @@ describe("Bounding Curve", function () {
     await expect(
       token2.connect(buyer1).transfer(pair, TOEKEN2_BUY_AMOUNTS[0])
     ).to.be.revertedWith(
-      "APEERC20Template: Can't send tokens to pair before launch"
+      "GEETSGardenToken: Can't send tokens to pair before launch"
     );
   });
 
-  let token3: APEERC20Template;
+  let token3: GEETSGardenToken;
 
   it("it should deploy token 3", async () => {
     const [owner, feeCollector, deployer1, deployer2, buyer1, buyer2, buyer3] =
@@ -947,7 +947,7 @@ describe("Bounding Curve", function () {
       throw new Error("Token address not found");
     }
 
-    token3 = APEERC20Template__factory.connect(tokenAddress, owner);
+    token3 = GEETSGardenToken__factory.connect(tokenAddress, owner);
 
     // buyer1 buys 2 eth
     await boundingCurve.connect(buyer1).buyToken(token3.getAddress(), 0, {
@@ -964,7 +964,7 @@ describe("Bounding Curve", function () {
       value: ethers.parseEther("2"),
     });
 
-    const pairContract = APEERC20Template__factory.connect(
+    const pairContract = GEETSGardenToken__factory.connect(
       await token3.pairAddress(),
       owner
     );
