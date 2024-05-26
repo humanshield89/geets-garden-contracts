@@ -1,0 +1,339 @@
+{
+  "manifestVersion": "3.2",
+  "proxies": [
+    {
+      "address": "0x01f7a448DD88719E8aeDB7b9CD201c06a220fF91",
+      "txHash": "0xbb496b8e6e6f189708687705396829a55d16336f98b384a5c8035076ce73e354",
+      "kind": "uups"
+    },
+    {
+      "address": "0x029c5dEe1339a000Ca6A3fE6513e0B0639F4ddBb",
+      "txHash": "0x9d50806afc256e5738a6e8cfc4a79f141f428a723f5263111ed0e08e75923e74",
+      "kind": "uups"
+    }
+  ],
+  "impls": {
+    "4db25f69f1a0864231aee5db84fac2b74f213faf8e2bfb9b16dff721c5c9a22b": {
+      "address": "0xF9102A1dd62F114350a36ca02B54F3a191204Aa8",
+      "txHash": "0xee52dd4d85498a8b40da918c002914cd8574c4033e98747e845968adede02367",
+      "layout": {
+        "solcVersion": "0.8.24",
+        "storage": [
+          {
+            "label": "virtualLiquidity",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_mapping(t_address,t_struct(VirtualLiquidity)3546_storage)",
+            "contract": "BoundingCurveStorage",
+            "src": "contracts/BoundingCurveStorage.sol:47"
+          },
+          {
+            "label": "buyFeeBps",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256",
+            "contract": "BoundingCurveStorage",
+            "src": "contracts/BoundingCurveStorage.sol:60"
+          },
+          {
+            "label": "sellFeeBps",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256",
+            "contract": "BoundingCurveStorage",
+            "src": "contracts/BoundingCurveStorage.sol:61"
+          },
+          {
+            "label": "listingFeeBps",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256",
+            "contract": "BoundingCurveStorage",
+            "src": "contracts/BoundingCurveStorage.sol:62"
+          },
+          {
+            "label": "feeTo",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_address",
+            "contract": "BoundingCurveStorage",
+            "src": "contracts/BoundingCurveStorage.sol:63"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)78_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)27_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_mapping(t_address,t_struct(VirtualLiquidity)3546_storage)": {
+            "label": "mapping(address => struct VirtualLiquidity)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(VirtualLiquidity)3546_storage": {
+            "label": "struct VirtualLiquidity",
+            "members": [
+              {
+                "label": "reserve0",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "reserve1",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "k",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "launched",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "3"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "5a6366144eabc2eb76a823ea3adb84c7814a1b330f180c49f834f5729fc74527": {
+      "address": "0x64674C7b9b4b96Dce532492383CB17Ce3100782B",
+      "txHash": "0xafa4d0639618537dd8d6379506201a1c62d6b9f0dbaaf68b0f7d322f67601b93",
+      "layout": {
+        "solcVersion": "0.8.24",
+        "storage": [
+          {
+            "label": "virtualLiquidity",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_mapping(t_address,t_struct(VirtualLiquidity)3551_storage)",
+            "contract": "BoundingCurveStorage",
+            "src": "contracts/BoundingCurveStorage.sol:47"
+          },
+          {
+            "label": "buyFeeBps",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256",
+            "contract": "BoundingCurveStorage",
+            "src": "contracts/BoundingCurveStorage.sol:60"
+          },
+          {
+            "label": "sellFeeBps",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256",
+            "contract": "BoundingCurveStorage",
+            "src": "contracts/BoundingCurveStorage.sol:61"
+          },
+          {
+            "label": "listingFeeBps",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256",
+            "contract": "BoundingCurveStorage",
+            "src": "contracts/BoundingCurveStorage.sol:62"
+          },
+          {
+            "label": "feeTo",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_address",
+            "contract": "BoundingCurveStorage",
+            "src": "contracts/BoundingCurveStorage.sol:63"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)78_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)27_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_mapping(t_address,t_struct(VirtualLiquidity)3551_storage)": {
+            "label": "mapping(address => struct VirtualLiquidity)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(VirtualLiquidity)3551_storage": {
+            "label": "struct VirtualLiquidity",
+            "members": [
+              {
+                "label": "reserve0",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "reserve1",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "k",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "launched",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "3"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
