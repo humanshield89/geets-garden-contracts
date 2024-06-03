@@ -1,11 +1,23 @@
 // SPDX-License-Identifier: UNLICENSED
+/**
+---- Jeet.Garden ----
+
+Deployed on https://Jeet.Garden
+
+Place where you can deploy ETH, BSC, AVAX and Base tokens & trade them instantly without the need of adding liquidity.
+
+Telegram: https://t.me/JeetGarden
+Twitter: https://x.com/JeetGarden
+
+----   Contract ----
+ */
 pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol";
 
-contract GEETSGardenToken is ERC20, Ownable {
+contract JEETSGardenToken is ERC20, Ownable {
     uint256 public maxWallet;
     address public immutable pairAddress;
 

@@ -2,12 +2,16 @@ import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@openzeppelin/hardhat-upgrades";
 import dotenv from "dotenv";
+import "@nomicfoundation/hardhat-verify";
 
 dotenv.config();
 
 const deployer_privateKey = process.env.DEPLOYER_PRIVATE_KEY as string;
 
 const config: HardhatUserConfig = {
+  sourcify: {
+    enabled: true,
+  },
   solidity: {
     version: "0.8.24",
     settings: {
@@ -21,8 +25,25 @@ const config: HardhatUserConfig = {
     currency: "USD",
     enabled: true,
     coinmarketcap: "1dd853ef-ffd9-4c3f-81f3-416e91789d00",
-    gasPrice: 25,
+    gasPrice: 12,
     // outputFile: "gas-report.txt",
+  },
+  etherscan: {
+    apiKey: {
+      base: "TGNZRF5XY7JSQN8FYR8XZEYYFQ8KAUUMRP",
+      avax: "avax", // apiKey is not required, just set a placeholder
+    },
+    customChains: [
+      {
+        network: "avax",
+        chainId: 43114,
+        urls: {
+          apiURL:
+            "https://api.routescan.io/v2/network/mainnet/evm/43114/etherscan",
+          browserURL: "https://avalanche.routescan.io",
+        },
+      },
+    ],
   },
   networks: {
     hardhat: {
@@ -68,6 +89,10 @@ const config: HardhatUserConfig = {
     },
     bsc: {
       url: "https://bsc-dataseed.binance.org/",
+      accounts: [deployer_privateKey],
+    },
+    avax: {
+      url: "https://api.avax.network/ext/bc/C/rpc",
       accounts: [deployer_privateKey],
     },
     polygon: {

@@ -2,31 +2,19 @@
 pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "./JEETSGardenToken.sol";
+import "./JEETSGardenTokenAVAX.sol";
 import "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
-import "@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol";
-import "hardhat/console.sol";
+import "./interfaces/IJoe.sol";
 import "@openzeppelin/contracts/utils/Create2.sol";
+
+import "hardhat/console.sol";
 
 uint256 constant INITIAL_SUPPLY = 1_000_000_000 ether;
 uint256 constant AUTO_LAUNCH_MC = 59_000;
 uint256 constant DISABLE_MAXWALLET_MC = 20_000;
 
 uint256 constant MAX_FEE_BPS = 1000; // 10%
-
-interface IUniFactory {
-    function createPair(
-        address tokenA,
-        address tokenB
-    ) external returns (address pair);
-
-    function getPair(
-        address tokenA,
-        address tokenB
-    ) external view returns (address pair);
-}
 
 struct VirtualLiquidity {
     uint256 reserve0;
@@ -35,7 +23,7 @@ struct VirtualLiquidity {
     bool launched;
 }
 
-contract BoundingCurveStorage is OwnableUpgradeable {
+contract BoundingCurveStorageAVAX is OwnableUpgradeable {
     ///@custom:oz-upgrades-unsafe-allow state-variable-immutable
     uint256 public immutable minVLP;
     using SafeERC20 for IERC20;
@@ -50,9 +38,9 @@ contract BoundingCurveStorage is OwnableUpgradeable {
     /// @custom:oz-upgrades-unsafe-allow state-variable-immutable
     AggregatorV3Interface public immutable dataFeed; // ETH Price
     /// @custom:oz-upgrades-unsafe-allow state-variable-immutable
-    IUniFactory public immutable uniFactory;
+    IJoeFactory public immutable uniFactory;
     /// @custom:oz-upgrades-unsafe-allow state-variable-immutable
-    IUniswapV2Router02 public immutable uniRouter;
+    IJoeRouter02 public immutable uniRouter;
     /// @custom:oz-upgrades-unsafe-allow state-variable-immutable
     address public immutable WETH;
 
@@ -90,8 +78,8 @@ contract BoundingCurveStorage is OwnableUpgradeable {
     constructor(
         AggregatorV3Interface dataFeed_,
         uint256 minVirtualLP_,
-        IUniFactory uniFactory_,
-        IUniswapV2Router02 uniRouter_
+        IJoeFactory uniFactory_,
+        IJoeRouter02 uniRouter_
     ) {
         dataFeed = dataFeed_;
         oracleDecimals = dataFeed_.decimals();
@@ -99,7 +87,7 @@ contract BoundingCurveStorage is OwnableUpgradeable {
         uniFactory = uniFactory_;
         uniRouter = uniRouter_;
         require(minVirtualLP_ > 0, "minVLP must be greater than 0");
-        WETH = uniRouter_.WETH();
+        WETH = uniRouter_.WAVAX();
     }
 
     modifier onlyNotLaunched(address token_) {
@@ -157,22 +145,11 @@ contract BoundingCurveStorage is OwnableUpgradeable {
         string memory symbol_,
         uint256 maxWallet_
     ) public payable {
-        // deploy new token using create2
-        // constructor args
-        /*
-    address(uniFactory),
-            WETH,
-            name_,
-            symbol_,
-            INITIAL_SUPPLY,
-            maxWallet_
-     */
-
         address newToken = Create2.deploy(
             0,
             keccak256(abi.encodePacked(msg.sender, nounces[msg.sender])),
             abi.encodePacked(
-                type(JEETSGardenToken).creationCode,
+                type(JEETSGardenTokenAVAX).creationCode,
                 abi.encode(
                     address(uniFactory),
                     WETH,
@@ -183,8 +160,6 @@ contract BoundingCurveStorage is OwnableUpgradeable {
                 )
             )
         );
-        // increment nonce
-        nounces[msg.sender]++;
 
         // it automatically mints the total supply to this contract
         virtualLiquidity[(newToken)].reserve0 = INITIAL_SUPPLY;
@@ -350,9 +325,9 @@ contract BoundingCurveStorage is OwnableUpgradeable {
 
         if (
             marketCap >= DISABLE_MAXWALLET_MC * 10 ** oracleDecimals &&
-            JEETSGardenToken(token_).maxWallet() > 0
+            JEETSGardenTokenAVAX(token_).maxWallet() > 0
         ) {
-            JEETSGardenToken(token_).setmaxWallet(0);
+            JEETSGardenTokenAVAX(token_).setmaxWallet(0);
         }
 
         if (marketCap >= AUTO_LAUNCH_MC * 10 ** oracleDecimals) {
@@ -380,7 +355,7 @@ contract BoundingCurveStorage is OwnableUpgradeable {
         virtualLiquidity[token_].launched = true;
 
         // disable max wallet after launch
-        JEETSGardenToken(token_).renounceOwnership();
+        JEETSGardenTokenAVAX(token_).renounceOwnership();
 
         uint256 reserves0 = virtualLiquidity[token_].reserve0;
         uint256 reserves1 = virtualLiquidity[token_].reserve1;
@@ -404,7 +379,7 @@ contract BoundingCurveStorage is OwnableUpgradeable {
 
         // safe to create LP from current token reserves
         // create lp with eth
-        (, , uint liquidity) = uniRouter.addLiquidityETH{
+        (, , uint liquidity) = uniRouter.addLiquidityAVAX{
             value: reserves1 - fee1
         }(
             token_,
@@ -417,7 +392,7 @@ contract BoundingCurveStorage is OwnableUpgradeable {
         require(liquidity > 0, "Failed to create LP");
 
         // burn the lp by sending them to dead address
-        IUniswapV2Pair pair = IUniswapV2Pair(uniFactory.getPair(token_, WETH));
+        IJoePair pair = IJoePair(uniFactory.getPair(token_, WETH));
 
         // burn the LP
         pair.transfer(address(0xdead), liquidity);

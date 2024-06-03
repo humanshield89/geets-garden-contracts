@@ -1,0 +1,173 @@
+{
+  "manifestVersion": "3.2",
+  "proxies": [
+    {
+      "address": "0x38C11FBaE0cf57B55a00951fBA9e6D1FDB4805DB",
+      "txHash": "0x695685288922d7ea888e9c80edbca0b9c136a9de3c0491b16fc49dc224f5f29b",
+      "kind": "uups"
+    }
+  ],
+  "impls": {
+    "6791562d48a53499d31dc298a02d0b145b5ab22ff3ff3344997a4be4848678c5": {
+      "address": "0x9ab411013f3398b9E664A85DAdE47a6EB6c583b8",
+      "txHash": "0xde3f904f060bb20217f030d4980c54bb20e9cb1a7cfe74cdb7f883610af632a8",
+      "layout": {
+        "solcVersion": "0.8.24",
+        "storage": [
+          {
+            "label": "virtualLiquidity",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_mapping(t_address,t_struct(VirtualLiquidity)3418_storage)",
+            "contract": "BoundingCurveStorage",
+            "src": "contracts/BoundingCurveStorage.sol:45"
+          },
+          {
+            "label": "buyFeeBps",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256",
+            "contract": "BoundingCurveStorage",
+            "src": "contracts/BoundingCurveStorage.sol:58"
+          },
+          {
+            "label": "sellFeeBps",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256",
+            "contract": "BoundingCurveStorage",
+            "src": "contracts/BoundingCurveStorage.sol:59"
+          },
+          {
+            "label": "listingFeeBps",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256",
+            "contract": "BoundingCurveStorage",
+            "src": "contracts/BoundingCurveStorage.sol:60"
+          },
+          {
+            "label": "feeTo",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_address",
+            "contract": "BoundingCurveStorage",
+            "src": "contracts/BoundingCurveStorage.sol:61"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)78_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)27_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_mapping(t_address,t_struct(VirtualLiquidity)3418_storage)": {
+            "label": "mapping(address => struct VirtualLiquidity)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(VirtualLiquidity)3418_storage": {
+            "label": "struct VirtualLiquidity",
+            "members": [
+              {
+                "label": "reserve0",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "reserve1",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "k",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "launched",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "3"
+              }
+            ],
+            "numberOfBytes": "128"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
